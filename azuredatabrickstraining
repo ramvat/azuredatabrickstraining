@@ -35,7 +35,7 @@ object movieUtils{
   codec.onMalformedInput(CodingErrorAction.REPLACE)
   codec.onUnmappableCharacter(CodingErrorAction.REPLACE)
  
-  val lines = Source.fromFile(fileName).getLines
+  val lines = Source.fromURL(fileName).getLines
  
   lines.drop(1)
  
@@ -60,10 +60,10 @@ val broadcastedMovies = sc.broadcast( () => {movieUtils.loadMovieNames(inputMovi
 
 // COMMAND ----------
 
-spark.conf.set("spark.hadoop.dfs.adls.oauth2.access.token.provider.type", "ClientCredential")
-spark.conf.set("spark.hadoop.dfs.adls.oauth2.client.id", "54452fbf-9c76-49ed-aea4-72b42a8748d7")
-spark.conf.set("spark.hadoop.dfs.adls.oauth2.credential", "cshdjNZZUO8ZgkeuwoZf8u0N+lXNBcrmTPu7+ZTg5/o=")
-spark.conf.set("spark.hadoop.dfs.adls.oauth2.refresh.url", "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/oauth2/token")
+spark.conf.set("dfs.adls.oauth2.access.token.provider.type", "ClientCredential")
+spark.conf.set("dfs.adls.oauth2.client.id", "54452fbf-9c76-49ed-aea4-72b42a8748d7")
+spark.conf.set("dfs.adls.oauth2.credential", "cshdjNZZUO8ZgkeuwoZf8u0N+lXNBcrmTPu7+ZTg5/o=")
+spark.conf.set("dfs.adls.oauth2.refresh.url", "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/oauth2/token")
 
 spark.sparkContext.hadoopConfiguration.set("dfs.adls.oauth2.access.token.provider.type", spark.conf.get("dfs.adls.oauth2.access.token.provider.type"))
 spark.sparkContext.hadoopConfiguration.set("dfs.adls.oauth2.client.id", spark.conf.get("dfs.adls.oauth2.client.id"))
