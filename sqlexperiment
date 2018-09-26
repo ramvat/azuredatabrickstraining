@@ -1,0 +1,9 @@
+-- Databricks notebook source
+DROP TABLE IF EXISTS temp_diamonds;
+CREATE TABLE temp_diamonds(customerid INT,orderid INT,amount FLOAT)
+  USING csv
+  OPTIONS (URL "https://datalakestoragedev.blob.core.windows.net/ramvatcontainer/customer-orders.csv?sp=r&st=2018-09-26T10:14:00Z&se=2018-09-26T18:14:00Z&spr=https&sv=2017-11-09&sig=C%2FnmVMJ6rrF6pFgrEx92vN2jvFwSivxLyTLKPikC6z4%3D&sr=b", header "false", mode "FAILFAST");
+
+-- COMMAND ----------
+
+SELECT customerid,SUM(amount) AS totalamount FROM temp_diamonds GROUP BY customerid ORDER BY totalamount desc LIMIT 10;
