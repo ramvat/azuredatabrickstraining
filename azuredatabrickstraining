@@ -24,7 +24,7 @@ import scala.io.Source
 import scala.io.Codec
 import java.nio.charset.CodingErrorAction
  
-object movieUtils{
+object movieUtils2{
  def loadMovieNames(fileName: String): Map[Int, String] = {
   if(fileName == null || fileName == "") {
     throw new Exception("Invalid File / Reference URL Specified!");
@@ -56,7 +56,7 @@ object movieUtils{
 // COMMAND ----------
 
 import com.microsoft.analytics.utils._
-val broadcastedMovies = sc.broadcast( () => {movieUtils.loadMovieNames(inputMoviesUrl)})
+val broadcastedMovies = sc.broadcast( () => {movieUtils2.loadMovieNames(inputMoviesUrl)})
 
 // COMMAND ----------
 
